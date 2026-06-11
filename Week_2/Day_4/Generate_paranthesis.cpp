@@ -1,0 +1,31 @@
+class Solution {
+private:
+    void solve(int open, int close, int n, string temp, vector<string>& ans) {
+
+        // Base case
+        if (temp.size() == 2 * n) {
+            ans.push_back(temp);
+            return;
+        }
+
+        // Open bracket add kar sakte hain
+        if (open < n) {
+            solve(open + 1, close, n, temp + "(", ans);
+        }
+
+        // Close bracket tabhi add kar sakte hain
+        // jab usse pehle koi unmatched '(' ho
+        if (close < open) {
+            solve(open, close + 1, n, temp + ")", ans);
+        }
+    }
+
+public:
+    vector<string> generateParenthesis(int n) {
+
+        vector<string> ans;
+        solve(0, 0, n, "", ans);
+
+        return ans;
+    }
+};
